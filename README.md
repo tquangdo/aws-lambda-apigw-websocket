@@ -8,7 +8,7 @@
 ## reference
 [youtube](https://www.youtube.com/watch?v=FIrzkt7kH80)
 
-## create 3 lambda functions
+## A) create 3 lambda functions
 ### 1/ `Connect`
 + Function name=`Connect`
 + Runtime=`python 3.9`
@@ -17,9 +17,9 @@
 Python 3.9.9
 ```
 + Execution role=`Create a new role` (because need to check CWatch log groups)
-### create the same with `SendMSG` & `Broadcast`
+### 2/ create the same with `SendMSG` & `Broadcast`
 
-## create api gateway
+## B) create api gateway
 + api type=`WebSocket API`
 + api name=`apigw_websocket_demo`
 + Route selection expression=`$request.body.action`
@@ -28,7 +28,7 @@ Python 3.9.9
 + `Integration for $connect`: Integration type=`Lambda` & Lambda function=`Connect`
 + `Integration for $sendMessage`: Integration type=`Lambda` & Lambda function=`SendMSG`
 
-## test connect websocket
+## C) test connect websocket
 ### api gateway
 + tab `Stages` > `production` > copy `WebSocket URL`
 + paste to tool ★★:`https://www.piesocket.com/websocket-tester` > click `Connect`
@@ -37,13 +37,13 @@ Python 3.9.9
 + search KW `connectionId` in logs will see `LexU_f4moAMCECw=`
 ![connect](screenshots/connect.png)
 
-## run lambda `SendMSG`
+## D) run lambda `SendMSG`
 + tab `Stages` > `production` > copy `Connection URL`
 + paste into `sendmsg.py`:
 ```py
 endpoint_url="xxxxxxxxxx.com/production"
 ```
-+ lambda's SG > `attach policies`=`AmazonAPIGatewayInvokeFullAccess`
++ lambda's SG > attach policies=`AmazonAPIGatewayInvokeFullAccess`
 + tool ★★: type this MSG:
 ```json
 { "action": "sendMessage", "message": "Hi, I am DoTQ!" }
@@ -51,13 +51,13 @@ endpoint_url="xxxxxxxxxx.com/production"
 + will see `RECEIVED: "responding..."` as `sendmsg.py > responseMessage = "responding..."`
 ![sendmsg](screenshots/sendmsg.png)
 
-## run lambda `Broadcast`
+## E) run lambda `Broadcast`
 + tab `Stages` > `production` > copy `Connection URL`
 + paste into `sendmsg.py`:
 ```py
 endpoint_url="xxxxxxxxxx.com/production"
 ```
-+ lambda's SG > `attach policies`=`AmazonAPIGatewayInvokeFullAccess`
++ lambda's SG > attach policies=`AmazonAPIGatewayInvokeFullAccess`
 + click `Test` -> will see "Anyone out there?" in tool ★★
 ```json
 {
