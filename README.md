@@ -5,6 +5,8 @@
 ![Forks](https://img.shields.io/github/forks/tquangdo/aws-lambda-apigw-websocket?color=f05340)
 [![Report an issue](https://img.shields.io/badge/Support-Issues-green)](https://github.com/tquangdo/aws-lambda-apigw-websocket/issues/new)
 
+![overview](screenshots/overview.png)
+
 ## reference
 [youtube](https://www.youtube.com/watch?v=FIrzkt7kH80)
 
